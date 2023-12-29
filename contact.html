@@ -23,10 +23,13 @@ http://www.templatemo.com/tm-466-cafe-house
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
+
     <style>
-      li.has-children {
-      position: relative;
-      }
+      li.has-children, li.has-submenu {
+        position: relative;
+        }
       li.has-children ul{
           display: none;
           position: absolute;
@@ -41,19 +44,6 @@ http://www.templatemo.com/tm-466-cafe-house
           width: 150px;
           z-index: 100;
       }
-.visually-hidden {
-    position: absolute;
-    overflow: hidden;
-    clip: rect(1px,1px,1px,1px);
-    width: 1px;
-    height: 1px;
-    word-wrap: normal;
-    filter: invert(48%) sepia(13%) saturate(3207%) hue-rotate(5deg) brightness(95%) contrast(80%);
-}
-a.focusable:focus {
-  position:relative;
-  outline: none;
-}
       @media (max-width: 767px){
       nav.tm-nav-menu.banner-menu {
         display: flex;
@@ -64,7 +54,6 @@ a.focusable:focus {
         top: 0;
         right: 0;
     }
-    
     nav.tm-nav-menu.banner-menu ul li a{
       padding: 5px 30px 5px 29px;
     }
@@ -91,8 +80,54 @@ a.focusable:focus {
         padding-right: 20px;
       }
     }
+    .wrap-element {
+        position: relative;
+        overflow: hidden;
+        padding-top: 56.25%;
+      }
+      .wrapped-iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: 0;
+      }
+      li.has-submenu button > span {
+            display: inline-block;
+            width: 0.8em;
+            height: 0.8em;
+            background: url('img/ex-dropdown-inactive.png') center no-repeat;
+        }
+        .visuallyhidden {
+            border: 0;
+            clip: rect(0 0 0 0);
+            -webkit-clip-path: inset(50%);
+            clip-path: inset(50%);
+            height: 1px;
+            margin: -1px;
+            overflow: hidden;
+            padding: 0;
+            position: absolute;
+            width: 1px;
+            white-space: nowrap;
+        }
+        li.has-submenu button{
+          background-color: black;
+          border: none;
+        }
+        ul.sub-menu {
+            background: #000;
+            top: 5rem;
+            width: 150px;
+            z-index: 100;
+            position: absolute;
+        }
+        nav ul > li.open > ul {
+            display: block;
+        }
     </style>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script>
       jQuery(document).ready(function($){
         $('li.has-children::before').toggle(function(){
@@ -102,9 +137,70 @@ a.focusable:focus {
       });
     </script>
 
+    <script>
+      function validatecontactForm() {
+          var valid = true;	
+          $(".formInputBox").css('background-color','');
+          $(".info").html('');
+          if(!$("#contact_name").val()) {
+              $("#contact_name-info").html("(required)");
+              $("#contact_name").css('background-color','#FFFFDF');
+              valid = false;
+          }
+          if(!$("#contact_subject").val()) {
+              $("#contact_subject-info").html("(required)");
+              $("#contact_subject").css('background-color','#FFFFDF');
+              valid = false;
+          }
+          if(!$("#contact_email").val()) {
+              $("#contact_email-info").html("(required)");
+              $("#contact_email").css('background-color','#FFFFDF');
+              valid = false;
+          }
+          if(!$("#contact_email").val().match(/^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/)) {
+              $("#contact_email-info").html("(invalid)");
+              $("#contact_email").css('background-color','#FFFFDF');
+              valid = false;
+          }
+          return valid;
+      }
+    </script>
+
+<script type="text/javascript">
+  function resetForm() {
+    document.getElementById('contact_name').value = "";
+    document.getElementById('contact_email').value = "";
+    document.getElementById('contact_subject').value = "";
+    document.getElementById('contact_message').value = "";
+  }
+  function contactformNotifications() {
+      var validdaily;	
+      validdaily = validatecontactForm();
+      if(validdaily){
+        Email.send({
+          Host: "smtp.elasticemail.com",
+          Username: "gauravbhardwaj.mca@gmail.com",
+          Password: "0B54389AAFA9605E14297B0D245C4F8B74D1",
+          To: 'crazysharma.love@gmail.com',
+          From: 'sumittyagi786@gmail.com',
+          Subject: document.getElementById('contact_subject').value,
+          Body:  "Name: " + document.getElementById('contact_name').value 
+                + "<br>" +
+                "E-mail: " + document.getElementById('contact_email').value
+                + "<br>" +
+                "Message: " + document.getElementById('contact_message').value,
+        })
+          .then(function (message) {
+            swal("Email Sent!", "Thank You for email us we will back to you soon!.", "success");
+            resetForm();
+          });
+      }
+  }
+</script>
 
   </head>
   <body>
+   
     <!-- Preloader -->
     <div id="loader-wrapper">
       <div id="loader"></div>
@@ -113,13 +209,6 @@ a.focusable:focus {
     </div>
     <!-- End Preloader -->
     <div class="tm-top-header">
-        <a href="#main" class="visually-hidden focusable" tabindex="1">Skip to main content</a>
-         <div class="tm-top-header">
-        <div class="skip-container">
-            <div class="row">
-            
-            </div>
-        </div>
       <div class="container">
         <div class="row">
           <div class="tm-top-header-inner">
@@ -135,7 +224,7 @@ a.focusable:focus {
                 <li><a href="index.html">Home</a></li>
                 <!-- <li><a href="today-special.html">Today Special</a></li>
                 <li><a href="menu.html">Menu</a></li> -->
-                  <li class="has-children"><a href="about-us.html">About Us</a>
+                <li class="has-children has-submenu"><a href="about-us.html" aria-expanded="false">About Us</a>
                     <ul class="sub-menu">
                         <li><a href="#">What We Do</a></li>
                         <li><a href="#">Locations</a></li>
@@ -170,29 +259,35 @@ a.focusable:focus {
       <div class="container" id="main">
         <section class="tm-section row">
           <h2 class="col-lg-12 margin-bottom-30">Send us a message</h2>
-          <form action="#" method="post" class="tm-contact-form">
+          <!-- <form action="#" method="post" class="tm-contact-form"> -->
             <div class="col-lg-6 col-md-6">
               <div class="form-group">
-                <input type="text" id="contact_name" class="form-control" placeholder="NAME" />
+                <span id="contact_name-info" class="info"></span>
+                <input type="text" id="contact_name" class="form-control formInputBox" name="contact_name" placeholder="NAME" required aria-required="true"/>
               </div>
               <div class="form-group">
-                <input type="email" id="contact_email" class="form-control" placeholder="EMAIL" />
+                <span id="contact_email-info" class="info"></span>
+                <input type="email" id="contact_email" class="form-control formInputBox" placeholder="EMAIL" required aria-required="true"/>
               </div>
               <div class="form-group">
-                <input type="text" id="contact_subject" class="form-control" placeholder="SUBJECT" />
+                <span id="contact_subject-info" class="info"></span>
+                <input type="text" id="contact_subject" class="form-control formInputBox" placeholder="SUBJECT" required aria-required="true"/>
               </div>
               <div class="form-group">
-                <textarea id="contact_message" class="form-control" rows="6" placeholder="MESSAGE"></textarea>
+                <textarea id="contact_message" name="contact_message" class="form-control rows="6" placeholder="MESSAGE"></textarea>
               </div>
               <div class="form-group">
-                <button class="tm-more-button" type="submit" name="submit">Send message</button> 
+                <button class="tm-more-button" type="submit" name="submit" onclick="contactformNotifications('Get In Touch')">Send message</button> 
               </div>               
             </div>
             <div class="col-lg-6 col-md-6">
               <div id="google-map"></div>
             </div> 
-          </form>
+          <!-- </form> -->
         </section>
+        <div class="wrap-element">
+          <iframe class="wrapped-iframe" src="https://www.youtube.com/embed/UF8uR6Z6KLc" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
+        </div>
       </div>
     </div> 
     <footer>
@@ -282,5 +377,29 @@ a.focusable:focus {
         loadGoogleMap();                
       });
       </script>
+
+   <script>
+    var menuItems = document.querySelectorAll('li.has-submenu');
+    Array.prototype.forEach.call(menuItems, function(el, i){
+      console.log(el, "test");
+      var activatingA = el.querySelector('li.has-submenu a');
+      var btn = '<button><span><span class="visuallyhidden">show submenu for “' + activatingA.text + '”</span></span></button>';
+      activatingA.insertAdjacentHTML('afterend', btn);
+
+      el.querySelector('button').addEventListener("click",  function(event){
+        if (this.parentNode.className == "has-children has-submenu") {
+          this.parentNode.className = "has-children has-submenu open";
+          this.parentNode.querySelector('a').setAttribute('aria-expanded', "true");
+          this.parentNode.querySelector('button').setAttribute('aria-expanded', "true");
+        } else {
+          this.parentNode.className = "has-children has-submenu";
+          this.parentNode.querySelector('a').setAttribute('aria-expanded', "false");
+          this.parentNode.querySelector('button').setAttribute('aria-expanded', "false");
+        }
+        event.preventDefault();
+      });
+    });
+  </script>
+
     </body>
     </html>

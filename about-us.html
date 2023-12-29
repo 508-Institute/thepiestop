@@ -15,16 +15,6 @@ http://www.templatemo.com/tm-466-cafe-house
   <link href="css/font-awesome.min.css" rel="stylesheet">
   <link href="css/templatemo-style.css" rel="stylesheet">
   <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
-  
-  <!-- Dependencies -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.0/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
-
-<!-- Able Player CSS -->
-<link rel="stylesheet" href="./ableplayer/build/ableplayer.min.css" type="text/css"/>
-
-<!-- Able Player JavaScript -->
-<script src="./ableplayer/build/ableplayer.js"></script>
 
   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -58,8 +48,8 @@ nav.tm-nav-menu.banner-menu li {
 list-style: none;
 float: left!important;
 }
-li.has-children {
-position: relative;
+li.has-children, li.has-submenu {
+        position: relative;
 }
 li.has-children ul{
   display: none;
@@ -75,25 +65,6 @@ li.has-children:hover ul.sub-menu{
   width: 150px;
   z-index: 100;
 }
-section.video-section{
-    text-align: center;
-}
-    .visually-hidden {
-    position: absolute;
-    overflow: hidden;
-    clip: rect(1px,1px,1px,1px);
-    width: 1px;
-    height: 1px;
-    word-wrap: normal;
-    filter: invert(48%) sepia(13%) saturate(3207%) hue-rotate(5deg) brightness(95%) contrast(80%);
-}
-a.focusable:focus {
-  position:relative;
-  outline: none;
-}
-    body .able-status-bar {
-    height: 2.5em;
-    }
 @media (max-width: 767px){
 nav.tm-nav-menu.banner-menu {
   display: flex;
@@ -130,6 +101,40 @@ nav.tm-nav-menu.banner-menu ul li a{
         padding-right: 20px;
       }
     }
+    li.has-submenu button > span {
+            display: inline-block;
+            width: 0.8em;
+            height: 0.8em;
+            background: url('img/ex-dropdown-inactive.png') center no-repeat;
+        }
+        .visuallyhidden {
+            border: 0;
+            clip: rect(0 0 0 0);
+            -webkit-clip-path: inset(50%);
+            clip-path: inset(50%);
+            height: 1px;
+            margin: -1px;
+            overflow: hidden;
+            padding: 0;
+            position: absolute;
+            width: 1px;
+            white-space: nowrap;
+        }
+        li.has-submenu button{
+          background-color: black;
+          border: none;
+        }
+        ul.sub-menu {
+            background: #000;
+            top: 5rem;
+            width: 150px;
+            z-index: 100;
+            position: absolute;
+        }
+        nav ul > li.open > ul {
+            display: block;
+        }
+    
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script>
@@ -141,7 +146,6 @@ nav.tm-nav-menu.banner-menu ul li a{
       });
     </script>
 
-
   </head>
   <body>
     <!-- Preloader -->
@@ -152,12 +156,6 @@ nav.tm-nav-menu.banner-menu ul li a{
     </div>
     <!-- End Preloader -->
     <div class="tm-top-header">
-        <a href="#main" class="visually-hidden focusable" tabindex="1">Skip to main content</a>
-        <div class="skip-container">
-            <div class="row">
-            
-           </div>
-        </div>
       <div class="container">
         <div class="row">
           <div class="tm-top-header-inner">
@@ -173,7 +171,8 @@ nav.tm-nav-menu.banner-menu ul li a{
                 <li><a href="index.html">Home</a></li>
                 <!-- <li><a href="today-special.html">Today's Specials</a></li>
                 <li><a href="menu.html">Menu</a></li> -->
-                <li class="has-children"><a class="active" href="about-us.html">About Us</a>
+               
+                  <li class="has-children has-submenu"><a class="active" href="about-us.html" aria-expanded="false">About Us</a>
                     <ul class="sub-menu">
                         <li><a href="#">What We Do</a></li>
                         <li><a href="#">Locations</a></li>
@@ -208,8 +207,8 @@ nav.tm-nav-menu.banner-menu ul li a{
             </ul>
           </nav>
           <p class="gray-text tm-welcome-description">The Pie Stop is a store that is used for the 508 Institute Course to test web accessibility and web usability. The home page on this website is only intended for the purpose of testing and demos.  </p>
-          <a href="#main" class="tm-more-button tm-more-button-welcome">Read More</a>      
-        </div>
+          <a href="#main" class="tm-more-button tm-more-button-welcome">Read More</a>  
+                 </div>
         <img src="img/table-set.png" alt="Table Set" class="tm-table-set img-responsive">             
       </div>      
     </section>
@@ -228,31 +227,11 @@ nav.tm-nav-menu.banner-menu ul li a{
             </div>              
           </div>            
         </section> 
-        <section class="video-section">
-        <video id="video1" preload="auto" width="480" height="360" poster="./ableplayer/media/wwa.jpg" data-able-player data-skin="2020" playsinline>
-			<source type="video/mp4" src="./ableplayer/media/Pie.mp4"/>
-			<source type="video/webm" src="./ableplayer/media/wwa.webm"/>
-			<track kind="captions" src="./ableplayer/media/wwa_captions_de.vtt" srclang="de" label="Deutsche"/>
-			<track kind="captions" src="./ableplayer/media/wwa_captions_en.vtt" srclang="en" label="English" default/>
-			<track kind="captions" src="./ableplayer/media/wwa_captions_es.vtt" srclang="es" label="Español"/>
-			<track kind="subtitles" src="./ableplayer/media/wwa_captions_fr.vtt" srclang="fr" label="Français"/>
-			<track kind="subtitles" src="./ableplayer/media/wwa_captions_ja.vtt" srclang="ja" lang="ja" label="日本語"/>
-			<track kind="descriptions" src="./ableplayer/media/wwa_description_de.vtt" srclang="de"/>
-			<track kind="descriptions" src="./ableplayer/media/wwa_description_en.vtt" srclang="en"/>
-			<track kind="descriptions" src="./ableplayer/media/wwa_description_es.vtt" srclang="es"/>
-			<track kind="descriptions" src="./ableplayer/media/wwa_description_fr.vtt" srclang="fr"/>
-			<track kind="descriptions" src="./ableplayer/media/wwa_description_ja.vtt" srclang="ja"/>
-			<track kind="chapters" src="./ableplayer/media/wwa_chapters_de.vtt" srclang="de"/>
-			<track kind="chapters" src="./ableplayer/media/wwa_chapters_en.vtt" srclang="en"/>
-			<track kind="chapters" src="./ableplayer/media/wwa_chapters_es.vtt" srclang="es"/>
-			<track kind="chapters" src="./ableplayer/media/wwa_chapters_fr.vtt" srclang="fr"/>
-		</video>
-		</section>
         
         <!-- Nwesletter Section Adding From Here -->
 
         <!--Newsletter Section End From Here -->
-
+       
         <section class="tm-section tm-section-margin-bottom-0 row">
           <div class="col-lg-12 tm-section-header-container">
             <h2 class="tm-section-header gold-text tm-handwriting-font"><img src="img/logo.png" alt="Logo" class="tm-site-logo"> Popular Items</h2>
@@ -429,6 +408,27 @@ nav.tm-nav-menu.banner-menu ul li a{
    <!-- JS -->
    <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>      <!-- jQuery -->
    <script type="text/javascript" src="js/templatemo-script.js"></script>      <!-- Templatemo Script -->
-
+   <script>
+    var menuItems = document.querySelectorAll('li.has-submenu');
+    Array.prototype.forEach.call(menuItems, function(el, i){
+      console.log(el, "test");
+       var activatingA = el.querySelector('li.has-submenu a');
+       var btn = '<button><span><span class="visuallyhidden">show submenu for “' + activatingA.text + '”</span></span></button>';
+       activatingA.insertAdjacentHTML('afterend', btn);
+ 
+       el.querySelector('button').addEventListener("click",  function(event){
+         if (this.parentNode.className == "has-children has-submenu") {
+           this.parentNode.className = "has-children has-submenu open";
+           this.parentNode.querySelector('a').setAttribute('aria-expanded', "true");
+           this.parentNode.querySelector('button').setAttribute('aria-expanded', "true");
+         } else {
+           this.parentNode.className = "has-children has-submenu";
+           this.parentNode.querySelector('a').setAttribute('aria-expanded', "false");
+           this.parentNode.querySelector('button').setAttribute('aria-expanded', "false");
+         }
+         event.preventDefault();
+       });
+     });
+    </script>
  </body>
  </html>

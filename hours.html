@@ -52,9 +52,9 @@ http://www.templatemo.com/tm-466-cafe-house
     list-style: none;
     float: left!important;
     }
-    li.has-children {
-    position: relative;
-    }
+    li.has-children, li.has-submenu {
+        position: relative;
+        }
     li.has-children ul{
         display: none;
         position: absolute;
@@ -69,19 +69,6 @@ http://www.templatemo.com/tm-466-cafe-house
         width: 150px;
         z-index: 100;
     }
-    .visually-hidden {
-    position: absolute;
-    overflow: hidden;
-    clip: rect(1px,1px,1px,1px);
-    width: 1px;
-    height: 1px;
-    word-wrap: normal;
-    filter: invert(48%) sepia(13%) saturate(3207%) hue-rotate(5deg) brightness(95%) contrast(80%);
-}
-a.focusable:focus {
-  position:relative;
-  outline: none;
-}
     @media (max-width: 767px){
       nav.tm-nav-menu.banner-menu {
         display: flex;
@@ -92,7 +79,6 @@ a.focusable:focus {
         top: 0;
         right: 0;
     }
-    
     nav.tm-nav-menu.banner-menu ul li a{
       padding: 5px 30px 5px 29px;
     }
@@ -119,6 +105,39 @@ a.focusable:focus {
         padding-right: 20px;
       }
     }
+    li.has-submenu button > span {
+            display: inline-block;
+            width: 0.8em;
+            height: 0.8em;
+            background: url('img/ex-dropdown-inactive.png') center no-repeat;
+        }
+        .visuallyhidden {
+            border: 0;
+            clip: rect(0 0 0 0);
+            -webkit-clip-path: inset(50%);
+            clip-path: inset(50%);
+            height: 1px;
+            margin: -1px;
+            overflow: hidden;
+            padding: 0;
+            position: absolute;
+            width: 1px;
+            white-space: nowrap;
+        }
+        li.has-submenu button{
+          background-color: black;
+          border: none;
+        }
+        ul.sub-menu {
+            background: #000;
+            top: 5rem;
+            width: 150px;
+            z-index: 100;
+            position: absolute;
+        }
+        nav ul > li.open > ul {
+            display: block;
+        }
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script>
@@ -129,7 +148,6 @@ a.focusable:focus {
         });
       });
     </script>
-
   </head>
   <body>
     <!-- Preloader -->
@@ -140,12 +158,6 @@ a.focusable:focus {
     </div>
     <!-- End Preloader -->
     <div class="tm-top-header">
-        <a href="#main" class="visually-hidden focusable" tabindex="1">Skip to main content</a>
-        <div class="skip-container">
-            <div class="row">
-            
-            </div>
-        </div>
       <div class="container">
         <div class="row">
           <div class="tm-top-header-inner">
@@ -161,7 +173,7 @@ a.focusable:focus {
                 <li><a href="index.html">Home</a></li>
                 <!-- <li><a href="today-special.html">Today's Specials</a></li>
                 <li><a href="menu.html">Menu</a></li> -->
-                <li class="has-children"><a href="about-us.html">About Us</a>
+                <li class="has-children has-submenu"><a href="about-us.html" aria-expanded="false">About Us</a>
                     <ul class="sub-menu">
                         <li><a href="#">What We Do</a></li>
                         <li><a href="#">Locations</a></li>
@@ -208,7 +220,7 @@ a.focusable:focus {
         <section class="tm-section row">
           <div class="first-table">
             <table border="2" class="display nowrap dataTable" style="width:100%">
-                <h2>Hours</h2>
+                <caption>Hours</caption>
                    <tr>
                       <th>Monday–Thursday</th>
                       <th>Friday, Sunday</th>
@@ -231,7 +243,7 @@ a.focusable:focus {
         </section>
         <section class="tm-section row">
             <table border="2" class="display nowrap dataTable" style="width:100%" role="presentation">
-                <h2>Work Schedule</h2>
+                <caption>Work Schedule</caption>
                   <tr>
                     <td>Monday</td>
                     <td>Bruce</td>
@@ -449,6 +461,27 @@ a.focusable:focus {
    <!-- JS -->
    <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>      <!-- jQuery -->
    <script type="text/javascript" src="js/templatemo-script.js"></script>      <!-- Templatemo Script -->
+   <script>
+    var menuItems = document.querySelectorAll('li.has-submenu');
+    Array.prototype.forEach.call(menuItems, function(el, i){
+      console.log(el, "test");
+      var activatingA = el.querySelector('li.has-submenu a');
+      var btn = '<button><span><span class="visuallyhidden">show submenu for “' + activatingA.text + '”</span></span></button>';
+      activatingA.insertAdjacentHTML('afterend', btn);
 
+      el.querySelector('button').addEventListener("click",  function(event){
+        if (this.parentNode.className == "has-children has-submenu") {
+          this.parentNode.className = "has-children has-submenu open";
+          this.parentNode.querySelector('a').setAttribute('aria-expanded', "true");
+          this.parentNode.querySelector('button').setAttribute('aria-expanded', "true");
+        } else {
+          this.parentNode.className = "has-children has-submenu";
+          this.parentNode.querySelector('a').setAttribute('aria-expanded', "false");
+          this.parentNode.querySelector('button').setAttribute('aria-expanded', "false");
+        }
+        event.preventDefault();
+      });
+    });
+  </script>
  </body>
  </html>
