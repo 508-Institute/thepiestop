@@ -326,7 +326,10 @@ ul {
   color: #c79c60;
   text-decoration: none;
 }
-.margin-bottom-30 { margin-bottom: 30px; }
+.margin-bottom-30 { margin-bottom: 30px;
+  margin-left: 103px;
+  z-index: 1;
+}
 .margin-bottom-60 { margin-bottom: 60px; }
 .margin-top-60 { margin-top: 60px; }
 .margin-top-15 { margin-top: 15px; }
