@@ -25,6 +25,22 @@ http://www.templatemo.com/tm-466-cafe-house
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://smtpjs.com/v3/smtp.js"></script>
+	
+	    <style>
+        .skip-to-content {
+            position: absolute;
+            top: -40px;
+            left: 10px;
+/*            background: #000;*/
+            color: #fff !important;
+            padding: 8px;
+            z-index: 100;
+        }
+
+        .skip-to-content:focus {
+            top: 10px;
+        }
+    </style>
     
     <style>
         
@@ -174,7 +190,17 @@ http://www.templatemo.com/tm-466-cafe-house
         }
         </style>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-        <script>
+        
+<script>document.querySelector('.skip-to-content').addEventListener('click', function(e) {
+    var target = document.getElementById('main-content');
+    target.setAttribute('tabindex', '-1');
+    target.focus();
+});
+</script>
+	
+	
+	
+	    <script>
           jQuery(document).ready(function($){
             $('li.has-children::before').toggle(function(){
               $('li.has-children ul').css({'display': 'block'});},
@@ -299,6 +325,8 @@ http://www.templatemo.com/tm-466-cafe-house
    
   </head>
   <body>
+	  
+	<a href="#main-content" class="skip-to-content">Skip to Content</a>  
     <!-- Preloader -->
     <div id="loader-wrapper">
       <div id="loader"></div>
@@ -337,6 +365,7 @@ http://www.templatemo.com/tm-466-cafe-house
         </div>    
       </div>
     </div>
+	  <main id="main-content">
     <section class="tm-welcome-section">
       <div class="container tm-position-relative">
         <div class="tm-lights-container">
