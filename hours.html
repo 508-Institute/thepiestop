@@ -148,8 +148,26 @@ http://www.templatemo.com/tm-466-cafe-house
         });
       });
     </script>
+	
+<style>
+.skip-to-content {
+position: absolute;
+top: -40px;
+left: 10px;
+/*background: #000;*/
+color: #fff !important;
+padding: 8px;
+z-index: 100;
+}
+
+.skip-to-content:focus {
+top: 10px;
+}
+</style>
+	
   </head>
   <body>
+	  <a href="#main-content" class="skip-to-content">Skip to Content</a> 
     <!-- Preloader -->
     <div id="loader-wrapper">
       <div id="loader"></div>
@@ -188,13 +206,18 @@ http://www.templatemo.com/tm-466-cafe-house
         </div>    
       </div>
     </div>
+	  
+	 
+		  
+		  
     <section class="tm-welcome-section">
       <div class="container tm-position-relative">
         <div class="tm-lights-container">
           <img src="img/light.png" alt="Light" class="light light-1">
           <img src="img/light.png" alt="Light" class="light light-2">
           <img src="img/light.png" alt="Light" class="light light-3">  
-        </div>        
+        </div>
+		  <main id="main-content">
         <div class="row tm-welcome-content">
           <h2 class="white-text tm-handwriting-font tm-welcome-header"><img src="img/header-line.png" alt="Line" class="tm-header-line">&nbsp;Welcome To&nbsp;&nbsp;<img src="img/header-line.png" alt="Line" class="tm-header-line"></h2>
           <h2 class="gold-text tm-welcome-header-2">THE PIE STOP</h2>
@@ -209,6 +232,14 @@ http://www.templatemo.com/tm-466-cafe-house
             </ul>
           </nav>
 
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+        
+<script>document.querySelector('.skip-to-content').addEventListener('click', function(e) {
+    var target = document.getElementById('main-content');
+    target.setAttribute('tabindex', '-1');
+    target.focus();
+});
+</script>
           <p class="gray-text tm-welcome-description">The Pie Stop is a store that is used for the 508 Institute Course to test web accessibility and web usability. The home page on this website is only intended for the purpose of testing and demos.  </p>
           <a href="#main" class="tm-more-button tm-more-button-welcome">Read More</a>      
         </div>
@@ -483,5 +514,14 @@ http://www.templatemo.com/tm-466-cafe-house
       });
     });
   </script>
+		
+<script>document.querySelector('.skip-to-content').addEventListener('click', function(e) {
+    var target = document.getElementById('main-content');
+    target.setAttribute('tabindex', '-1');
+    target.focus();
+});
+</script>
+		
+		
  </body>
  </html>
